@@ -1,9 +1,9 @@
 # 👩‍💻 DMC-STUDY
-## SQL(Oracle)
+## 🟠 SQL(Oracle)
 ### 221221수
 ### 221222목
 
-## Python
+## 🟠 Python
 ### 221219월 : numpy 및 배열
 ### 221220화 : numpy(Dataframe, Series)
 ### 221223금 : 점검 시험, pandas
