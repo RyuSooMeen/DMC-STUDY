@@ -1,6 +1,6 @@
 DROP TABLE fine_dust;
 DROP TABLE fine_dust_standard;
--- 쿼리 12-12
+-- 12-12
 CREATE TABLE fine_dust (
     gu_name           VARCHAR2(50) NOT NULL,  -- 구 명
     mea_station       VARCHAR2(30) NOT NULL,  -- 측정소
@@ -12,7 +12,7 @@ CREATE TABLE fine_dust (
 ALTER TABLE fine_dust
 ADD CONSTRAINTS fine_dust_pk PRIMARY KEY (gu_name, mea_station, mea_date);
 
--- 쿼리 12-12
+-- 12-12
 CREATE TABLE fine_dust (
     gu_name           VARCHAR2(50) NOT NULL,  -- 구 명
     mea_station       VARCHAR2(30) NOT NULL,  -- 측정소
@@ -25,7 +25,7 @@ ALTER TABLE fine_dust
 ADD CONSTRAINTS fine_dust_pk PRIMARY KEY (gu_name, mea_station, mea_date);
 
 
--- 쿼리 12-13
+-- 12-13
 CREATE TABLE fine_dust_standard (
     org_name          VARCHAR2(50) NOT NULL,  -- 기관명
     std_name          VARCHAR2(30) NOT NULL,  -- 미세먼지 기준
@@ -38,7 +38,7 @@ CREATE TABLE fine_dust_standard (
 ALTER TABLE fine_dust_standard
 ADD CONSTRAINTS fine_dust_standard_pk PRIMARY KEY (org_name, std_name);
 
--- 데이터 삽입
+-- data insert
 insert into fine_dust values('서울 강남구','강남구',to_date('2017-06-08','yyyy-mm-dd'),48,31);
 insert into fine_dust values('서울 강남구','강남구',to_date('2017-06-09','yyyy-mm-dd'),62,42);
 insert into fine_dust values('서울 강남구','강남구',to_date('2017-06-10','yyyy-mm-dd'),54,31);
