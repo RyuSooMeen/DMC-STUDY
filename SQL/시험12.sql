@@ -1,12 +1,12 @@
--- 9Àå
+-- 9ì¥
 select * from dept_master;
 select * from emp_master;
 
--- 1. ¼¼Á¾´ë¿Í »ç¿øÁ¤º¸ Á¶È¸
+-- 1. ì„¸ì¢…ëŒ€ì™€ ì‚¬ì›ì •ë³´ ì¡°íšŒ
 SELECT emp_name, gender, age, hire_date from emp_master
-where emp_name = '¼¼Á¾´ë¿Õ';
+where emp_name = 'ì„¸ì¢…ëŒ€ì™•';
 
--- 2. ÁÖ¼Ò ÀÕ±â, Á¶È¸ : »ç¿ø¸í, ¼ºº°, ³ªÀÌ, ÀÔ»çÀÏÀÚ, ºÎ¼­¸í, ÁÖ¼Ò
+-- 2. ì£¼ì†Œ ì‡ê¸°, ì¡°íšŒ : ì‚¬ì›ëª…, ì„±ë³„, ë‚˜ì´, ì…ì‚¬ì¼ì, ë¶€ì„œëª…, ì£¼ì†Œ
 SELECT e.emp_name, e.gender, e.age, e.hire_date, d.dept_name, a.city || ' ' || a.gu || ' ' || a.address_name
     FROM emp_master e
   LEFT JOIN dept_master d
@@ -15,8 +15,8 @@ SELECT e.emp_name, e.gender, e.age, e.hire_date, d.dept_name, a.city || ' ' || a
     ON e.address_id = a.address_id
 order by e.age desc;
 
--- 3. »ç¿øÀÌ ¾ø´Â ºÎ¼­Á¤º¸, Á¶È¸ : ºÎ¼­¸í
--- JOIN »ç¿ë
+-- 3. ì‚¬ì›ì´ ì—†ëŠ” ë¶€ì„œì •ë³´, ì¡°íšŒ : ë¶€ì„œëª…
+-- JOIN ì‚¬ìš©
 SELECT d.dept_name FROM dept_master d
 LEFT JOIN emp_master e
 ON d.dept_id = e.dept_id
@@ -26,44 +26,45 @@ SELECT * FROM dept_master d
 LEFT JOIN emp_master e
 ON d.dept_id = e.dept_id;
 
---¼­ºê Äõ¸® »ç¿ë
+--ì„œë¸Œ ì¿¼ë¦¬ ì‚¬ìš©
 SELECT d.dept_name FROM dept_master d
 WHERE d.dept_id not in (SELECT e.dept_id FROM emp_master e 
 where d.dept_id = e.dept_id);
 
--- ¶Ç ´Ù¸¥ Ç®ÀÌ
+-- ë˜ ë‹¤ë¥¸ í’€ì´
 SELECT dept_name FROM dept_master
 WHERE dept_id = 
 (SELECT dept_id FROM dept_master
 MINUS
 SELECT dept_id FROM emp_master);
 
--- 12Àå
+-- 12ì¥
+-- ë°ì´í„° : lotto_detail, lotto_master
 select * from lotto_detail;
 select * from lotto_master;
---1. ´çÃ·±İº° ÀÎ¿ø¼ö 
-SELECT TO_CHAR(m.draw_date,'YYYY') AS YEAR,sum(case when d.win_money < 1000000000 then d.win_person_no else 0 end) AS LESS_THAN_10¾ï,
-sum(case when 1000000000 <= d.win_money and d.win_money < 3000000000 then d.win_person_no else 0 end) AS LESS_THAN_30¾ï,
-sum(case when 3000000000 <= d.win_money and d.win_money < 5000000000 then d.win_person_no else 0 end) AS LESS_THAN_50¾ï,
-sum(case when 5000000000 <= d.win_money and d.win_money < 10000000000 then d.win_person_no else 0 end) AS LESS_THAN_100¾ï,
-sum(case when d.win_money >= 10000000000 then d.win_person_no else 0 end) AS MORE_THAN_100¾ï,
+--1. ë‹¹ì²¨ê¸ˆë³„ ì¸ì›ìˆ˜ 
+SELECT TO_CHAR(m.draw_date,'YYYY') AS YEAR,sum(case when d.win_money < 1000000000 then d.win_person_no else 0 end) AS LESS_THAN_10ì–µ,
+sum(case when 1000000000 <= d.win_money and d.win_money < 3000000000 then d.win_person_no else 0 end) AS LESS_THAN_30ì–µ,
+sum(case when 3000000000 <= d.win_money and d.win_money < 5000000000 then d.win_person_no else 0 end) AS LESS_THAN_50ì–µ,
+sum(case when 5000000000 <= d.win_money and d.win_money < 10000000000 then d.win_person_no else 0 end) AS LESS_THAN_100ì–µ,
+sum(case when d.win_money >= 10000000000 then d.win_person_no else 0 end) AS MORE_THAN_100ì–µ,
 sum (d.win_person_no) AS ALL_PEOPLE
 FROM lotto_detail d, lotto_master m
 where d.seq_no = m.seq_no
 GROUP by TO_CHAR(m.draw_date,'YYYY')
 order by TO_CHAR(m.draw_date,'YYYY');
 
--- 2. 1µî¸¸, 50¾ïÀÌ»ó
+-- 2. 1ë“±ë§Œ, 50ì–µì´ìƒ
 SELECT m.draw_date, m.seq_no, d.rank_no, d.win_money
 ,num1||', '||num2||', '||num3||', '||num4||', '||num5||', '||num6 as LOTTO_NUM, m.bonus
 FROM lotto_detail d, lotto_master m
 where d.seq_no = m.seq_no and d.rank_no = 1 and win_money > 5000000000
 order by d.win_money desc;
 
----
+-- ë°ì´í„° : fine_dust, fine_dust_standard
 select * from fine_dust;
 select * from fine_dust_standard;
--- 3. ¿ùº°, Áö¿ª±¸º° ÃÊ¹Ì¼¼¸ÕÁö ÃÖ´ë ÃÖ¼Ò,Æò±Õ, Æò±Õ »óÅÂ, Æò±ÕÃÊ¹Ì¼¼¸ÕÁö ³»¸²Â÷¼ø
+-- 3. ì›”ë³„, ì§€ì—­êµ¬ë³„ ì´ˆë¯¸ì„¸ë¨¼ì§€ ìµœëŒ€ ìµœì†Œ,í‰ê· , í‰ê·  ìƒíƒœ, í‰ê· ì´ˆë¯¸ì„¸ë¨¼ì§€ ë‚´ë¦¼ì°¨ìˆœ
 SELECT a.months, a.GU,
 a.pm10_max, a.pm10_min, a.pm25_max, a.pm25_min, a.pm10_avg, a.pm25_avg
 ,( SELECT s.std_name
@@ -71,14 +72,14 @@ a.pm10_max, a.pm10_min, a.pm25_max, a.pm25_min, a.pm10_avg, a.pm25_avg
           WHERE s.org_name = 'WHO'
             AND a.pm10_avg BETWEEN s.pm10_start
                                AND s.pm10_end
-  ) "¹Ì¼¼¸ÕÁö »óÅÂ"
+  ) "ë¯¸ì„¸ë¨¼ì§€ ìƒíƒœ"
 ,( SELECT s.std_name
            FROM fine_dust_standard s
           WHERE s.org_name = 'WHO'
             AND a.pm25_avg BETWEEN s.pm25_start
                                AND s.pm25_end
-  ) "ÃÊ¹Ì¼¼¸ÕÁö »óÅÂ"
-FROM ( -- ¿ùÆò±Õ ¹Ì¼¼¸ÕÁö ³óµµ ¼­ºêÄõ¸®
+  ) "ì´ˆë¯¸ì„¸ë¨¼ì§€ ìƒíƒœ"
+FROM ( -- ì›”í‰ê·  ë¯¸ì„¸ë¨¼ì§€ ë†ë„ ì„œë¸Œì¿¼ë¦¬
        SELECT TO_CHAR(d.mea_date,'YYYY-MM') months
              ,d.gu_name GU
              ,max(d.PM10) pm10_max
@@ -94,29 +95,29 @@ FROM ( -- ¿ùÆò±Õ ¹Ì¼¼¸ÕÁö ³óµµ ¼­ºêÄõ¸®
      ) a
 ORDER BY a.pm10_avg desc, a.pm25_avg desc;
 
----
+-- ë°ì´í„° : traffic_accident
 select * from traffic_accident;
--- 4. ±³Åë¼ö´Üº° »ç°í °Ç¼ö
+-- 4. êµí†µìˆ˜ë‹¨ë³„ ì‚¬ê³  ê±´ìˆ˜
 SELECT trans_type
-      ,SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END) "1980³â´ë »ç°í ¼ö"
-      ,SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN death_person_num ELSE 0 END) "1980³â´ë »ç¸ÁÀÚ ¼ö"
-      ,round(SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END)*100,2) "1980³â´ë »ç¸ÁÀÚ ºñÀ²(%)"
+      ,SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END) "1980ë…„ëŒ€ ì‚¬ê³  ìˆ˜"
+      ,SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN death_person_num ELSE 0 END) "1980ë…„ëŒ€ ì‚¬ë§ì ìˆ˜"
+      ,round(SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END)*100,2) "1980ë…„ëŒ€ ì‚¬ë§ì ë¹„ìœ¨(%)"
       
-      ,SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END) "1990³â´ë »ç°í ¼ö"
-      ,SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN death_person_num ELSE 0 END) "1990³â´ë »ç¸ÁÀÚ ¼ö"
-      ,round(SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)*100,2) "1990³â´ë »ç¸ÁÀÚ ºñÀ²(%)"
+      ,SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END) "1990ë…„ëŒ€ ì‚¬ê³  ìˆ˜"
+      ,SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN death_person_num ELSE 0 END) "1990ë…„ëŒ€ ì‚¬ë§ì ìˆ˜"
+      ,round(SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)*100,2) "1990ë…„ëŒ€ ì‚¬ë§ì ë¹„ìœ¨(%)"
       
-      ,SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END) "2000³â´ë »ç°í ¼ö"
-      ,SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN death_person_num ELSE 0 END) "2000³â´ë »ç¸ÁÀÚ ¼ö"
-      ,round(SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)*100,2) "2000³â´ë »ç¸ÁÀÚ ºñÀ²(%)"
+      ,SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END) "2000ë…„ëŒ€ ì‚¬ê³  ìˆ˜"
+      ,SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN death_person_num ELSE 0 END) "2000ë…„ëŒ€ ì‚¬ë§ì ìˆ˜"
+      ,round(SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)*100,2) "2000ë…„ëŒ€ ì‚¬ë§ì ë¹„ìœ¨(%)"
       
-      ,SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END) "2010³â´ë »ç°í ¼ö"
-      ,SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN death_person_num ELSE 0 END) "2010³â´ë »ç¸ÁÀÚ ¼ö"
-      ,round(SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END)*100,2) "2010³â´ë »ç¸ÁÀÚ ºñÀ²(%)"
+      ,SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END) "2010ë…„ëŒ€ ì‚¬ê³  ìˆ˜"
+      ,SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN death_person_num ELSE 0 END) "2010ë…„ëŒ€ ì‚¬ë§ì ìˆ˜"
+      ,round(SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN death_person_num ELSE 0 END)/SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END)*100,2) "2010ë…„ëŒ€ ì‚¬ë§ì ë¹„ìœ¨(%)"
       
-      ,round((SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END)*100,2) "1990³â Àü³â´ëºñ Áõ°¨À²(%)"
-      ,round((SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)*100,2) "2000³â Àü³â´ëºñ Áõ°¨À²(%)"
-      ,round((SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)*100,2) "2010³â Àü³â´ëºñ Áõ°¨À²(%)"
+      ,round((SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 1980 AND 1989 THEN total_acct_num ELSE 0 END)*100,2) "1990ë…„ ì „ë…„ëŒ€ë¹„ ì¦ê°ìœ¨(%)"
+      ,round((SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 1990 AND 1999 THEN total_acct_num ELSE 0 END)*100,2) "2000ë…„ ì „ë…„ëŒ€ë¹„ ì¦ê°ìœ¨(%)"
+      ,round((SUM(CASE WHEN year BETWEEN 2010 AND 2016 THEN total_acct_num ELSE 0 END)-SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END))/SUM(CASE WHEN year BETWEEN 2000 AND 2009 THEN total_acct_num ELSE 0 END)*100,2) "2010ë…„ ì „ë…„ëŒ€ë¹„ ì¦ê°ìœ¨(%)"
 FROM traffic_accident
 GROUP BY trans_type;
 
