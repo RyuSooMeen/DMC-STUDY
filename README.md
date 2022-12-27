@@ -1,5 +1,4 @@
-# DMC-STUDY
-## 221219월 시작
+# 👩‍💻 DMC-STUDY
 ## SQL(Oracle)
 ### 221221수
 ### 221222목
