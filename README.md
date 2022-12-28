@@ -23,6 +23,6 @@
   - ##### 시각화 : scatter, boxplot
   - ##### percentile, IQR
   - ##### 결측치 처리 : 대체화(열mean), 행 삭제
-  - ##### 데이터 변환 : 범주형(label encoding, One-Hot encoding, Dummy), 연속형(정규화, 표준화)
+  - ##### 데이터 변환 : 범주형(label encoding, One-Hot encoding, Dummy), 연속형(정규화, 표준화, 로그변환)
   - ##### 데이터 정규화 : Standardscaler, RoubstScaler, MinMaxScaler
   - ##### 데이터 통합 : 데이터 전처리와 가공작업이 60-70%, 중복 데이터 검출, 단위 통일, 유일 식별자
