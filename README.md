@@ -17,7 +17,9 @@
 
 ## 🚩 2주차 : Python, EDA, 데이터 분석
 - #### 221226월 : pandas, EDA시작
+
 - #### 221227화 : pandas(pandas indexing, pandas 기초)
+
 - #### 221228수 : pandas 활용
   - ##### 기초통계량 : std, var, skew(왜도), kurt(첨도)
   - ##### 시각화 : scatter, boxplot
@@ -26,6 +28,7 @@
   - ##### 데이터 변환 : 범주형(label encoding, One-Hot encoding, Dummy), 연속형(정규화, 표준화, 로그변환)
   - ##### 데이터 정규화 : Standardscaler, RoubstScaler, MinMaxScaler
   - ##### 데이터 통합 : 데이터 전처리와 가공작업이 60-70%, 중복 데이터 검출, 단위 통일, 유일 식별자
+  
 - #### 221229목 : pandas 시각화, 데이터 분석, 정규표현식
   - ##### 시각화 방법 : line, bar, hist, boxplot, 커널밀도함수 등(plt 또는 seaborn 편리함) 
   - ##### 종류 : 상관분석, 회귀분석(다중, 로지스틱 등), 분류, Text mining
@@ -33,3 +36,5 @@
   - ##### 다중공선성 : 독립변수 간 상관관계가 존재할 때 발생
        - ##### 회귀분석 시 변수선택법, 주성분 회귀분석이 필요함
   - ##### 데이터 정규성 파악 : qq플롯, shapiro test로 확인
+
+- #### 221230금
